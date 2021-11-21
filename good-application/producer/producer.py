@@ -16,7 +16,8 @@ class Producer:
         self._init_kafka_producer()
 
     def _init_kafka_producer(self):
-        self.kafka_host = "kafka-local.kafkaplaypen.svc.cluster.local:9092"
+        #self.kafka_host = "kafka-0.kafka-headless.default.svc.cluster.local:9092"
+        self.kafka_host = "localhost:9092"
         self.kafka_topic = "my-topic"
         self.producer = KafkaProducer(
 
