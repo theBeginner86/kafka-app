@@ -1,4 +1,3 @@
-
 from kafka import KafkaProducer
 from kafka.errors import KafkaError
 import json
@@ -6,6 +5,7 @@ import faker
 from datetime import datetime
 import logging
 import time
+from data import data
 
 logging.basicConfig(level=logging.INFO)
 
@@ -18,7 +18,7 @@ class Producer:
     def _init_kafka_producer(self):
         #self.kafka_host = "kafka-0.kafka-headless.default.svc.cluster.local:9092"
         self.kafka_host = "localhost:9092"
-        self.kafka_topic = "my-topic"
+        self.kafka_topic = "testing"
         self.producer = KafkaProducer(
 
             bootstrap_servers=self.kafka_host, value_serializer=lambda v: json.dumps(v).encode(),
@@ -53,8 +53,12 @@ class Producer:
 
 if __name__ == "__main__":
     producer = Producer()
-    while True:
-        random_email = producer.create_random_email()
-        producer.publish_to_kafka(random_email)
+    # while True:
+    #     random_email = producer.create_random_email()
+    #     producer.publish_to_kafka(random_email)
+    #
+    #     time.sleep(5)
+    for location in data:
+        producer.publish_to_kafka(data[location])
 
         time.sleep(5)

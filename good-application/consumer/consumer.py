@@ -13,15 +13,17 @@ class Consumer:
     def _init_kafka_consumer(self):
         #self.kafka_host = "kafka.default.svc.cluster.local"
         self.kafka_host = "localhost:9092"
-        self.kafka_topic = "my-topic"
+        self.kafka_topic = "testing"
         self.consumer = KafkaConsumer(
-            "my-topic",
+            "testing",
             bootstrap_servers=self.kafka_host,
+            auto_offset_reset='earliest',
         )
 
     def consume_from_kafka(self):
         for message in self.consumer:
             logging.info(message.value)
+            print(message.value.decode('utf-8'))
 
 
 if __name__ == "__main__":

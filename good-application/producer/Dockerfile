@@ -6,6 +6,7 @@ RUN pip3 install kafka-python
 RUN pip3 install faker
 
 COPY producer.py .
+COPY data.py .
 
 
 CMD ["python3", "-u", "./producer.py"]
